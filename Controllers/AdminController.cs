@@ -17,10 +17,10 @@ public class AdminController : Controller
         httpClient = clientFactory.CreateClient("ResturangApi");
     }
 
-    [HttpGet]
+    [HttpGet("Login")]
     public IActionResult Login() => View(new AdminAuthVM());
 
-    [HttpPost]
+    [HttpPost("Login")]
     public async Task<IActionResult> Login(AdminAuthVM model)
     {
         var loginDto = new AdminLoginDTO

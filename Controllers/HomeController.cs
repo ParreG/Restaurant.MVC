@@ -20,7 +20,7 @@ namespace ResturantPG_MVC.Controllers
 
             var popular = dishes?
                 .Where(d => d.IsPopular)
-                .Take(8) 
+                .Take(6) 
                 .ToList() ?? new List<Dish>();
 
             return View(popular);
