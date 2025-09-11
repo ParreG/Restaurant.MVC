@@ -1,0 +1,38 @@
+﻿@model ResturantPG_MVC.ViewModel.DishVM
+
+<div class="container mt-5">
+    <h2 class="text-primary">✏️ Uppdatera rätt</h2>
+
+    <form asp-action="AdminUpdateDish" asp-route-id="@Model.dish_Id" method="post" class="mt-4">
+        <input type="hidden" asp-for="dish_Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PictureURL" class="form-label"></label>
+            <input asp-for="PictureURL" class="form-control" />
+        </div>
+
+        <div class="form-check mb-3">
+            <input asp-for="IsPopular" class="form-check-input" type="checkbox" />
+            <label asp-for="IsPopular" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Spara ändringar</button>
+        <a asp-action="AdminDishes" class="btn btn-secondary">Avbryt</a>
+    </form>
+
+</div>

@@ -1,0 +1,72 @@
+﻿@model ResturantPG_MVC.ViewModel.AdminAuthVM
+
+<div class="container mt-5" style="max-width:500px;">
+    <h2 class="text-center mb-4 text-primary">🔑 Admin</h2>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm" style="@(Model.ShowRegister ? "display:none;" : "display:block;")">
+        <form method="post" asp-action="Login">
+            <div class="form-floating mb-3">
+                <input asp-for="Login.Username" class="form-control" placeholder="Användarnamn" />
+                <label asp-for="Login.Username">Användarnamn</label>
+                <span asp-validation-for="Login.Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Login.Password" type="password" class="form-control" placeholder="Lösenord" />
+                <label asp-for="Login.Password">Lösenord</label>
+                <span asp-validation-for="Login.Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Logga in</button>
+        </form>
+
+        <div class="text-center">
+            <button type="button" id="showRegister" class="btn btn-outline-secondary w-100">
+                Registrera dig
+            </button>
+        </div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="@(Model.ShowRegister ? "display:block;" : "display:none;")">
+        <form method="post" asp-action="Register">
+            <div class="form-floating mb-3">
+                <input asp-for="Register.Email" class="form-control" placeholder="E-post" />
+                <label asp-for="Register.Email"></label>
+                <span asp-validation-for="Register.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Register.UserName" class="form-control" placeholder="Användarnamn" />
+                <label asp-for="Register.UserName"></label>
+                <span asp-validation-for="Register.UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Register.Password" type="password" class="form-control" placeholder="Lösenord" />
+                <label asp-for="Register.Password"></label>
+                <span asp-validation-for="Register.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Register.RegistrationCode" class="form-control" placeholder="Kod" />
+                <label asp-for="Register.RegistrationCode"></label>
+                <span asp-validation-for="Register.RegistrationCode" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 mb-3">Skapa konto</button>
+        </form>
+
+        <div class="text-center">
+            <button type="button" id="showLogin" class="btn btn-outline-secondary w-100">
+                Tillbaka till login
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/adminAuth.js"></script>
+}
+

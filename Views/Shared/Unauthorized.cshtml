@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "401 - Inte inloggad";
+}
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <div class="card shadow-lg p-5 border-0" style="max-width: 600px;">
+        <div class="card-body">
+            <h1 class="display-1 fw-bold text-warning">401</h1>
+            <h3 class="mb-3 text-secondary">Du måste vara inloggad</h3>
+            <p class="lead mb-4">
+                För att se den här sidan behöver du logga in.
+            </p>
+            <a asp-controller="Admin" asp-action="Login" class="btn btn-lg btn-primary px-4">
+                🔐 Logga in
+            </a>
+        </div>
+    </div>
+</div>

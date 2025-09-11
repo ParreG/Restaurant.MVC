@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "403 - Åtkomst nekad";
+}
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <div class="card shadow-lg p-5 border-0" style="max-width: 600px;">
+        <div class="card-body">
+            <h1 class="display-1 fw-bold text-danger">403</h1>
+            <h3 class="mb-3 text-secondary">Åtkomst nekad</h3>
+            <p class="lead mb-4">
+                Du har inte behörighet att visa den här sidan.
+                Kontakta en administratör om du tror att detta är fel.
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-primary px-4">
+                ⬅️ Till startsidan
+            </a>
+        </div>
+    </div>
+</div>

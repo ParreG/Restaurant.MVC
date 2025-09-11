@@ -1,0 +1,64 @@
+﻿@model ResturantPG_MVC.ViewModel.AdminInviteVM
+
+<div class="container mt-5" style="max-width:720px;">
+    <h2 class="text-primary mb-4">🔑 Admin Invites</h2>
+
+    <form asp-controller="AdminInvite" asp-action="CreateAdminInvites" method="post" class="mb-3">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">
+            Skapa ny invite-kod
+        </button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model?.Message))
+    {
+        <div class="alert alert-info">@Model.Message</div>
+    }
+
+    @if (Model != null && Model.InviteCode != Guid.Empty)
+    {
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="mb-2">
+                    <div class="fw-bold">Invite-kod</div>
+
+                    <div class="input-group">
+                        <input id="inviteCodeInput" class="form-control"
+                               value="@Model.InviteCode"
+                               readonly />
+                        <button type="button" class="btn btn-outline-secondary" onclick="copyInviteCode(this)">
+                            Kopiera
+                        </button>
+                    </div>
+                    <small class="text-muted d-block mt-2">
+                        ⏰ Koden är giltig i <strong>14 dagar</strong> från det att den skapades.
+                    </small>
+                </div>
+
+                <div class="text-muted small mt-3">
+                    Endast <span class="fw-semibold">SuperAdmin</span> kan skapa invites.
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function copyInviteCode(btn) {
+            const input = document.getElementById('inviteCodeInput');
+            input.select();
+            input.setSelectionRange(0, 99999); // iOS
+            navigator.clipboard.writeText(input.value)
+                .then(() => {
+                    const original = btn.textContent;
+                    btn.textContent = 'Kopierad!';
+                    setTimeout(() => btn.textContent = original, 1500);
+                })
+                .catch(() => {
+                    // fallback om Clipboard API inte finns
+                    try { document.execCommand('copy'); } catch { }
+                });
+        }
+    </script>
+}

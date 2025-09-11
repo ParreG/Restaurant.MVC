@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ResturantPG_MVC.ViewModel.DishVM>
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">📋 Alla rätter</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Det finns inga rätter i systemet ännu.</div>
+    }
+    else
+    {
+        <ul class="list-group shadow-sm">
+            @foreach (var dish in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row">
+
+                    
+                    <div class="me-auto d-flex flex-column flex-sm-row gap-3">
+                        <div>
+                            @if (string.IsNullOrEmpty(dish.PictureURL))
+                            {
+                                <img src="/images/placeholder.png" alt="Ingen bild!"
+                                     class="img-thumbnail dish-thumb" />
+                            }
+                            else
+                            {
+                                <img src="@dish.PictureURL" alt="Bild på @dish.Name"
+                                     class="img-thumbnail dish-thumb" />
+                            }
+
+                        </div>
+                        <div>
+                            <div class="fw-bold">@dish.Name</div>
+                            <div class="text-muted">@($"{dish.Price:N0} kr")</div>
+                            <div>@dish.Description</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="d-flex gap-2 mt-3 mt-md-0 flex-wrap">
+                        <a asp-controller="AdminDishes" asp-action="AdminUpdateDish" asp-route-id="@dish.dish_Id"
+                           class="btn btn-warning btn-sm text-white flex-fill">
+                            ✏️ Uppdatera
+                        </a>
+                        <a href="#"
+                           class="btn btn-danger btn-sm text-white flex-fill"
+                           data-bs-toggle="modal"
+                           data-bs-target="#deleteModal-@dish.dish_Id">
+                            🗑️ Ta bort
+                        </a>
+
+                        @* Pupup för borttagning! *@
+                        <div class="modal fade" id="deleteModal-@dish.dish_Id" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title">Bekräfta borttagning</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Är du säker på att du vill ta bort <strong>@dish.Name</strong>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                                        <a asp-action="DeleteDish" asp-route-id="@dish.dish_Id" class="btn btn-danger">🗑️ Ta bort</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </li>
+            }
+                <li class="list-group-item text-center">
+                    <a asp-controller="Dish" asp-action="CreateDish"
+                       class="btn add-dish-btn btn-lg w-100">
+                        ➕ Lägg till maträtt
+                    </a>
+                </li>
+
+        </ul>
+        
+    }
+
+</div>

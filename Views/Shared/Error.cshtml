@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Ett fel har inträffat";
+}
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <div class="card shadow-lg p-5 border-0" style="max-width: 600px;">
+        <div class="card-body">
+            <h1 class="display-5 fw-bold text-danger">Något gick fel</h1>
+            <p class="lead mb-4">
+                Vi kunde inte behandla din förfrågan just nu. Försök igen senare.
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-primary px-4">
+                ⬅️ Till startsidan
+            </a>
+        </div>
+    </div>
+</div>

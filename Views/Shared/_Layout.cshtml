@@ -1,0 +1,117 @@
+﻿@using ResturantPG_MVC.Extensions
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Restaurang PG</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0d1b4c;">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                    <img src="https://github.com/ParreG/bilder/blob/main/6478fe81-92bf-4fe8-80af-456a79b4bc98.png?raw=true"
+                         alt="Restaurang PG"
+                         style="height:55px;" class="me-2" />
+                    <span class="fw-bold text-warning">Restaurang PG</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        @{
+                            var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                            var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")"
+                               asp-controller="Home" asp-action="Index">Start</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "Dish" && currentAction == "Index" ? "active" : "")"
+                               asp-controller="Dish" asp-action="Index">Meny</a>
+                        </li>
+                        @if (Context.Session.GetToken() != null)
+                        {
+
+                            <li class ="nav-item">
+                                <a class="nav-link @(currentController == "AdminPanel" && currentAction == "AdminPanel" ? "active" : "")"
+                                   asp-controller="AdminPanel" asp-action="AdminPanel">Adminpanel</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link @(currentController == "Admin" && currentAction == "Logout" ? "active" : "") text-warning"
+                                   asp-controller="Admin" asp-action="Logout">Logga ut</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(currentController == "Booking" && currentAction == "Index" ? "active" : "")"
+                                   asp-controller="Booking" asp-action="Index">Boka bord</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link @(currentController == "Admin" && currentAction == "Login" ? "active" : "")"
+                                   asp-controller="Admin" asp-action="Login">Admin</a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container flex-grow-1">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-white mt-auto">
+        <div class="container py-5">
+            <div class="row text-center text-md-start">
+
+                <div class="col-md-4 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-md-start">
+                    <img src="https://github.com/ParreG/bilder/blob/main/6478fe81-92bf-4fe8-80af-456a79b4bc98.png?raw=true"
+                         alt="Restaurang PG"
+                         class="footer-logo mb-3" />
+                    <h5 class="fw-bold text-warning">Restaurang PG</h5>
+                    <p class="small">Smaker från street food till fine dining – alltid med passion.</p>
+                </div>
+
+                <!-- Kontakt -->
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h6 class="fw-bold text-warning">Kontakt</h6>
+                    <p class="mb-1">📍 Stockholm</p>
+                    <p class="mb-1">☎ 08-123 45 67</p>
+                    <p class="mb-0">✉ info@restaurangpg.se</p>
+                </div>
+
+                <!-- Öppettider -->
+                <div class="col-md-4">
+                    <h6 class="fw-bold text-warning">Öppettider</h6>
+                    <p class="mb-1">Mån–Fre: 11:00 – 23:00</p>
+                    <p class="mb-1">Lör: 12:00 – 01:00</p>
+                    <p class="mb-0">Sön: 12:00 – 22:00</p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4" />
+            <div class="text-center">
+                <small>© 2025 Restaurang PG – Alla rättigheter förbehållna</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    @RenderSection("Styles", required: false)
+</body>
+</html>

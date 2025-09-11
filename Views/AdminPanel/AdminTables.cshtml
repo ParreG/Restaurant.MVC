@@ -1,0 +1,154 @@
+﻿@model List<ResturantPG_MVC.ViewModel.TableVM>
+@{
+    ViewData["Title"] = "Redigera bordsplan";
+    var safeModel = Model ?? new List<ResturantPG_MVC.ViewModel.TableVM>();
+    var json = System.Text.Json.JsonSerializer.Serialize(safeModel);
+}
+
+<div class="container mt-4">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+        <h2 class="text-primary mb-0">🪑 Redigera bordsplan</h2>
+
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createTableModal">➕ Nytt bord</button>
+            <button id="openPickEditBtn" class="btn btn-outline-primary">✏️ Redigera bord</button>
+            <button id="openPickDeleteBtn" class="btn btn-outline-danger">🗑️ Ta bort bord</button>
+            <button id="saveLayoutBtn" class="btn btn-primary">💾 Spara placeringar</button>
+        </div>
+    </div>
+
+    <div class="floor-wrap">
+        <svg id="floor" class="floor" viewBox="0 0 3000 2000" role="img" aria-label="Restaurangens bord och stolar"></svg>
+    </div>
+</div>
+
+<!-- CREATE MODAL (floating outlined, konsekvent) -->
+<div class="modal fade" id="createTableModal" tabindex="-1" aria-labelledby="createTableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="createTableLabel">➕ Nytt bord</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+
+            <div class="modal-body p-4">
+                <div class="form-floating-outlined mb-3">
+                    <input id="createNumber" type="number" min="1" class="form-control" placeholder=" " autocomplete="off" />
+                    <label for="createNumber">Bordsnummer</label>
+                </div>
+
+                <div class="form-floating-outlined mb-0">
+                    <input id="createCapacity" type="number" min="1" class="form-control" placeholder=" " autocomplete="off" />
+                    <label for="createCapacity">Kapacitet</label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button id="createSubmit" type="button" class="btn btn-primary">Skapa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VÄLJ NUMMER FÖR EDIT (floating outlined) -->
+<div class="modal fade" id="pickEditModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">✏️ Redigera bord</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="form-floating-outlined mb-0">
+                    <input type="number" min="1" id="pickEditNumber" class="form-control" placeholder=" " />
+                    <label for="pickEditNumber">Bordsnummer</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button id="pickEditSubmit" class="btn btn-primary">Fortsätt</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT CAPACITY (floating outlined) -->
+<div class="modal fade" id="editTableModal" tabindex="-1" aria-labelledby="editTableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editTableLabel">✏️ Redigera bord</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+
+            <div class="modal-body p-4">
+                <div class="form-floating-outlined mb-0">
+                    <input id="editCapacity" type="number" min="1" class="form-control" placeholder=" " autocomplete="off" />
+                    <label for="editCapacity">Kapacitet</label>
+                </div>
+                <div class="form-text mt-2">
+                    Position ändras genom att dra i planen och sparas via “Spara placeringar”.
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button id="editSubmit" type="button" class="btn btn-primary">Spara</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VÄLJ NUMMER FÖR DELETE (floating outlined) -->
+<div class="modal fade" id="pickDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">🗑️ Ta bort bord</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="form-floating-outlined mb-0">
+                    <input type="number" min="1" id="pickDeleteNumber" class="form-control" placeholder=" " />
+                    <label for="pickDeleteNumber">Bordsnummer</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button id="pickDeleteSubmit" class="btn btn-danger">Nästa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONFIRM DELETE -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Bekräfta borttagning</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDeleteText" class="mb-0">Är du säker på att du vill ta bort bordet?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">Ja, ta bort</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast-meddelanden -->
+<div id="notify-root" aria-live="polite" aria-atomic="true"></div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-tables.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script>window.tableData = @Html.Raw(json);</script>
+    <script src="~/js/AdminTable.js"></script>
+}

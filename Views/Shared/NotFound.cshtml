@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "404 - Sidan kunde inte hittas";
+}
+
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <div class="card shadow-lg p-5 border-0" style="max-width: 600px;">
+        <div class="card-body">
+            <h1 class="display-1 fw-bold text-danger">404</h1>
+            <h3 class="mb-3 text-secondary">Oj! Vi kunde inte hitta sidan 🕵️</h3>
+            <p class="lead mb-4">
+                Resursen du letar efter verkar inte finnas, eller så kan den ha flyttats.
+                Kontrollera länken eller gå tillbaka till startsidan.
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-primary px-4">
+                ⬅️ Tillbaka hem
+            </a>
+        </div>
+    </div>
+</div>

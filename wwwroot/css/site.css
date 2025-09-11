@@ -1,0 +1,214 @@
+/* =============================
+   GLOBALT
+============================= */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: #fdfdfd; /* ljus, ren bakgrund */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+/* =============================
+   NAVBAR
+============================= */
+/* NAVBAR */
+.navbar {
+    background-color: #0d1b4c;
+}
+
+.navbar .navbar-nav .nav-link {
+    position: relative;
+    color: #ffffff;
+    padding: 0.75rem 1.25rem; /* mer luft runt texten */
+    font-size: 1.1rem; /* större text */
+    font-weight: 600; /* lite fetare */
+    letter-spacing: 0.5px; /* lite mer spacing */
+    transition: color 0.3s ease;
+}
+
+/* Hover-effekt: färg + underline */
+.navbar .navbar-nav .nav-link:hover {
+    color: #ffd700;
+}
+
+.navbar .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 50%; /* starta i mitten */
+    bottom: -8px; /* längre ner så den syns tydligare */
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px; /* tjockare underline */
+    background-color: #ffd700;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.navbar .navbar-nav .nav-link:hover::after,
+.navbar .navbar-nav .nav-link.active::after {
+    width: 80%; /* underline går nästan hela vägen */
+}
+
+/* Active-länk */
+.navbar .navbar-nav .nav-link.active {
+    color: #ffd700;
+}
+
+
+/* =============================
+   FORMULÄR
+============================= */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #0d1b4c;
+    border-color: #d4af37;
+}
+
+/* Floating labels (outlined style) */
+.form-floating-outlined {
+    position: relative;
+}
+
+.form-floating-outlined > .form-control {
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem 0.75rem 0.25rem 0.75rem;
+    background: transparent;
+}
+
+.form-floating-outlined > label {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 0.4rem;
+    transition: all 0.25s ease-in-out;
+    color: #6c757d;
+    pointer-events: none;
+}
+
+.form-floating-outlined > .form-control:focus ~ label,
+.form-floating-outlined > .form-control:not(:placeholder-shown) ~ label {
+    top: -0.6rem;
+    left: 0.6rem;
+    font-size: 0.85rem;
+    color: #0d1b4c; /* mörkblå */
+    font-weight: 600;
+}
+
+/* =============================
+   KNAPPAR
+============================= */
+.btn-primary,
+.btn-success {
+    background-color: #0d1b4c;
+    border-color: #0d1b4c;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    background-color: #132766;
+    border-color: #132766;
+}
+
+.btn-outline-secondary {
+    border-color: #0d1b4c;
+    color: #0d1b4c;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #0d1b4c;
+    color: #fff;
+}
+
+.list-group-item small {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.add-dish-btn {
+    background-color: rgba(13, 27, 76, 0.1); /* navbarblå men transparent */
+    color: #0d1b4c; /* samma mörkblå text */
+    border: 2px dashed #0d1b4c; /* markerad med blå ram */
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px); /* glassig känsla */
+}
+
+.add-dish-btn:hover {
+    background-color: #0d1b4c; /* navbarfärgen */
+    color: #ffd700; /* guldtext (samma som navbar hover) */
+    border-style: solid; /* solid ram på hover */
+    transform: translateY(-2px); /* liten pop-effekt */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* =============================
+   KORT (CARDS)
+============================= */
+.card {
+    border: 1px solid #eee;
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+.card-title {
+    color: #0d1b4c;
+    font-weight: 600;
+}
+
+.badge.bg-primary {
+    background-color: #d4af37 !important; /* guld */
+    color: #0d1b4c;
+}
+
+/* =============================
+   ADMIN DISHES - THUMBNAILS
+============================= */
+.dish-thumb {
+    width: 100px; /* fast bredd */
+    height: 80px; /* fast höjd */
+    object-fit: cover; /* beskär bilden snyggt */
+    border-radius: 6px; /* lite rundade hörn */
+}
+
+/* =============================
+   FOOTER
+============================= */
+.footer {
+    background-color: #0d1b4c;
+    color: #fff;
+}
+
+.footer-logo {
+    max-height: 80px;
+    width: auto;
+}
+
+.footer h5,
+.footer h6 {
+    color: #ffd700; /* guld */
+    font-weight: 600;
+}
