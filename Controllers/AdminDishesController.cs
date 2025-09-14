@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ResturantPG_MVC.Extensions;
+using ResturantPG_MVC.Models;
 using ResturantPG_MVC.ViewModel;
+using System.Text.Json;
 
 namespace ResturantPG_MVC.Controllers
 {
@@ -15,11 +17,32 @@ namespace ResturantPG_MVC.Controllers
         }
 
         [HttpGet("GetAllDishes")]
-        [Authorize]
-        public async Task<IActionResult> AdminDishes()
+        public async Task<IActionResult> AdminDishes() // ingen authorize då den används i menyn!
         {
-            var dishes = await httpClient.GetFromJsonAsync<List<DishVM>>("Dish/GetAllDishes");
-            return View(dishes ?? new List<DishVM>());
+            var response = await httpClient.GetAsync("Dish/GetAllDishes");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // Om API returnerar 404 eller något annat → returnera tom lista
+                return View(new List<Dish>());
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            List<Dish>? dishes;
+            try
+            {
+                dishes = JsonSerializer.Deserialize<List<Dish>>(content,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            }
+            catch
+            {
+                // Om det inte går att tolka → returnera tom lista istället
+                dishes = new List<Dish>();
+            }
+
+            return View(dishes ?? new List<Dish>());
+
         }
 
         [HttpGet("UpdateDish/{id}", Name = "UpdateDish")]

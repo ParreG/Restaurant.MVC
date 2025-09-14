@@ -1,5 +1,16 @@
 ﻿@model ResturantPG_MVC.ViewModel.AdminInviteVM
 
+@{
+    ViewData["Title"] = "Admin Invites";
+    Layout = "_Layout";
+}
+
+@section HeadContent {
+    <meta name="description" content="Skapa inbjudningskod för nya administratörer. Endast SuperAdmin kan skapa koder.">
+    <meta name="robots" content="noindex, nofollow" />
+}
+
+
 <div class="container mt-5" style="max-width:720px;">
     <h2 class="text-primary mb-4">🔑 Admin Invites</h2>
 
@@ -34,10 +45,6 @@
                         ⏰ Koden är giltig i <strong>14 dagar</strong> från det att den skapades.
                     </small>
                 </div>
-
-                <div class="text-muted small mt-3">
-                    Endast <span class="fw-semibold">SuperAdmin</span> kan skapa invites.
-                </div>
             </div>
         </div>
     }
@@ -48,7 +55,7 @@
         function copyInviteCode(btn) {
             const input = document.getElementById('inviteCodeInput');
             input.select();
-            input.setSelectionRange(0, 99999); // iOS
+            input.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(input.value)
                 .then(() => {
                     const original = btn.textContent;
@@ -56,7 +63,7 @@
                     setTimeout(() => btn.textContent = original, 1500);
                 })
                 .catch(() => {
-                    // fallback om Clipboard API inte finns
+                    // fallback
                     try { document.execCommand('copy'); } catch { }
                 });
         }

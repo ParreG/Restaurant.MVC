@@ -212,3 +212,66 @@ body {
     color: #ffd700; /* guld */
     font-weight: 600;
 }
+
+/* Ta bort datalist-ikonen (Chromium/Edge) på våra tidsfält */
+#timePart[list]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+/* (om du har ett andra tidsfält med annan id – lägg till det här också) */
+#timePartUpdate[list]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+/* Säkerställ ingen default-appearance som tvingar fram ikon */
+#timePart, #timePartUpdate {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+}
+
+/* ---- Form & card look ---- */
+.page-card {
+    background: #fff;
+    border: 1px solid rgba(13,27,76,.08);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(13,27,76,.06);
+    padding: 28px;
+}
+
+/* inputs – ta bort blå bakgrund / brus */
+.form-control, .form-select, textarea.form-control {
+    background-color: #fff !important;
+    border: 1px solid rgba(13,27,76,.18);
+    border-radius: 12px;
+}
+
+    .form-control:focus, .form-select:focus, textarea.form-control:focus {
+        border-color: rgba(13,27,76,.45);
+        box-shadow: 0 0 0 .2rem rgba(13,27,76,.12);
+    }
+
+/* primära knappar harmoniserade med din header (#0d1b4c) */
+.btn-primary {
+    background-color: #0d1b4c;
+    border-color: #0d1b4c;
+}
+
+    .btn-primary:hover {
+        filter: brightness(1.08);
+    }
+
+/* list-items lite mjukare */
+.list-group-item {
+    border: 1px solid rgba(13,27,76,.08);
+    border-radius: 12px !important;
+    margin-bottom: 10px;
+}
+
+/* varning för överbokning */
+.overbooked {
+    border: 1px solid rgba(220,53,69,.35) !important;
+    background: rgba(220,53,69,.06);
+}

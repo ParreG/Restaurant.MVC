@@ -1,6 +1,17 @@
 ﻿@using ResturantPG_MVC.ViewModel
 @model CreateDishVM
 
+@{
+    ViewData["Title"] = "Skapa ny maträtt";
+    Layout = "_Layout";
+}
+
+@section HeadContent {
+    <meta name="description" content="Administratörsgränssnitt för att skapa nya maträtter till Restaurang PG:s meny.">
+    <meta name="robots" content="noindex, nofollow" />
+}
+
+
 <div class="container mt-5" style="max-width:600px;">
     <h2 class="mb-4 text-center text-primary fw-bold">🍽️ Skapa ny maträtt</h2>
 

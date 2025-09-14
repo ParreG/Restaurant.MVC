@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ResturantPG_MVC.Extensions;
 using ResturantPG_MVC.Models;
 using ResturantPG_MVC.ViewModel;
 using System.Threading.Tasks;
@@ -25,12 +26,14 @@ namespace ResturantPG_MVC.Controllers
 
         public IActionResult CreateDish()
         {
+            httpClient.AddAuthHeader(HttpContext);
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateDish(CreateDishVM newDish)
         {
+            httpClient.AddAuthHeader(HttpContext);
             if (!ModelState.IsValid)
             {
                 return View(newDish);

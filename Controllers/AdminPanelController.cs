@@ -8,7 +8,7 @@ namespace ResturantPG_MVC.Controllers
     {
 
         [HttpGet]
-        public IActionResult AdminPanel()
+        public IActionResult AdminPanel() // Bara mellan vy!
         {
             return View(); 
         }

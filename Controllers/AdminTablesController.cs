@@ -28,13 +28,11 @@ namespace ResturantPG_MVC.Controllers
             httpClient.AddAuthHeader(HttpContext);
 
             var resp = await httpClient.GetAsync("Table/GetAllTables");
-            var raw = await resp.Content.ReadAsStringAsync();
 
             if (!resp.IsSuccessStatusCode)
                 return View("~/Views/AdminPanel/AdminTables.cshtml", new List<TableVM>());
 
-            var apiTables = JsonSerializer.Deserialize<List<TableDTO>>(raw,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+            var apiTables = await resp.Content.ReadFromJsonAsync<List<TableDTO>>() ?? new();
 
             var vm = apiTables.Select((t, i) => new TableVM
             {
@@ -48,6 +46,7 @@ namespace ResturantPG_MVC.Controllers
 
             return View("~/Views/AdminPanel/AdminTables.cshtml", vm);
         }
+
 
         [HttpPost("SaveLayout")]
         [Authorize]

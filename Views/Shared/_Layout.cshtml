@@ -8,6 +8,9 @@
     <title>@ViewData["Title"] - Restaurang PG</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
+    @RenderSection("HeadContent", required: false)
+
 </head>
 <body class="d-flex flex-column min-vh-100">
     <header>
@@ -112,6 +115,5 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @RenderSection("Scripts", required: false)
-    @RenderSection("Styles", required: false)
 </body>
 </html>

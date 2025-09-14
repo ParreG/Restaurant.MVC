@@ -1,5 +1,17 @@
-﻿@model List<ResturantPG_MVC.Models.Dish>
+﻿@* Meny sidan *@
+
+@model List<ResturantPG_MVC.Models.Dish>
 @using ResturantPG_MVC.Extensions
+
+@{
+    ViewData["Title"] = "Meny";
+    Layout = "_Layout";
+}
+
+@section HeadContent {
+    <meta name="description" content="Utforska Restaurang PG:s meny – maträtter för alla smaker. Se pris, beskrivningar och bilder.">
+}
+
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">

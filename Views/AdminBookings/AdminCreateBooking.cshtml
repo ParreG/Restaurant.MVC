@@ -1,0 +1,71 @@
+﻿@using ResturantPG_MVC.ViewModel
+@model NewBookingVM
+
+@{
+    ViewData["Title"] = "Skapa bokning";
+    Layout = "_Layout";
+}
+
+@section HeadContent {
+    <meta name="description" content="Administratörsgränssnitt för att skapa nya bokningar för restaurangen.">
+    <meta name="robots" content="noindex, nofollow" />
+}
+
+
+<div class="container mt-5" style="max-width:600px;">
+    <h2 class="mb-4 text-center text-primary fw-bold">📖 Skapa ny bokning</h2>
+
+    <form method="post" asp-action="AdminCreateBooking" class="needs-validation" novalidate>
+
+        <!-- Förnamn -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="Name" class="form-control" placeholder=" " />
+            <label asp-for="Name">Förnamn</label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Efternamn -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="LastName" class="form-control" placeholder=" " />
+            <label asp-for="LastName">Efternamn</label>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="Email" class="form-control" placeholder=" " />
+            <label asp-for="Email">E-postadress</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- Telefon -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="Tel" class="form-control" placeholder=" " />
+            <label asp-for="Tel">Telefonnummer</label>
+            <span asp-validation-for="Tel" class="text-danger"></span>
+        </div>
+
+        <!-- Starttid -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="BookingStart" type="datetime-local" class="form-control"
+                   value='@Model.BookingStart.ToString("yyyy-MM-ddTHH:mm")' />
+            <label asp-for="BookingStart">Starttid</label>
+            <span asp-validation-for="BookingStart" class="text-danger"></span>
+        </div>
+
+
+
+        <!-- Antal gäster -->
+        <div class="form-floating-outlined mb-4">
+            <input asp-for="NumberOfGuests" type="number" class="form-control" placeholder=" " />
+            <label asp-for="NumberOfGuests">Antal gäster</label>
+            <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="AdminBookings" class="btn btn-outline-secondary">⬅ Tillbaka</a>
+            <button type="submit" class="btn btn-primary">✅ Skapa bokning</button>
+        </div>
+
+    </form>
+</div>
