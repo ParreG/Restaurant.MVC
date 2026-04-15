@@ -91,6 +91,6 @@ The app expects the API at `https://localhost:7270/api/` — update the base add
 
 | Repo | Role |
 |------|------|
-| [restaurant-api](https://github.com/ParreG/RestrurantPG) | REST API — the backend |
-| [restaurant-mvc](https://github.com/ParreG/ResturantPG_MVC) | MVC frontend — server-rendered views |
+| [restaurant-api](https://github.com/ParreG/Restaurant.API) | REST API — the backend |
+| [restaurant-mvc](https://github.com/ParreG/Restaurant.MVC) | MVC frontend — server-rendered views |
 | [restaurant-angular](https://github.com/ParreG/ResturangPG_Angular) | Angular frontend — SPA client |
